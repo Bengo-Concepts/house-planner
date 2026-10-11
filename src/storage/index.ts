@@ -12,6 +12,7 @@ export {
   previewSnapshot,
   previewRevision,
   restorePreview,
+  startNewProject,
   type SyncStatus,
 } from './sync'
 export { setBusy, isBusy } from './busy'
