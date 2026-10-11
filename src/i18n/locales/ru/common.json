@@ -95,7 +95,12 @@
     "exportJson": "Экспорт JSON",
     "importJson": "Импорт JSON",
     "versions": "Версии",
-    "importInvalid": "План не прошёл проверку:\n\n{{error}}"
+    "importInvalid": "План не прошёл проверку:\n\n{{error}}",
+    "newProject": "Новый проект…",
+    "newProjectPrompt": "Название нового проекта. Текущий план сохранится как снимок в «Версии» → «Сохранённые».",
+    "newProjectDefault": "Новый проект",
+    "newProjectSnapshot": "{{name}} (до нового проекта, {{date}})",
+    "newProjectFailed": "Не удалось начать новый проект:\n\n{{error}}"
   },
   "versions": {
     "saved": "Сохранённые",
