@@ -91,7 +91,12 @@
     "exportJson": "Export JSON",
     "importJson": "Import JSON",
     "versions": "Versions",
-    "importInvalid": "The plan failed validation:\n\n{{error}}"
+    "importInvalid": "The plan failed validation:\n\n{{error}}",
+    "newProject": "New project…",
+    "newProjectPrompt": "Name of the new project. The current plan will be kept as a snapshot in Versions → Saved.",
+    "newProjectDefault": "New project",
+    "newProjectSnapshot": "{{name}} (before new project, {{date}})",
+    "newProjectFailed": "Could not start a new project:\n\n{{error}}"
   },
   "versions": {
     "saved": "Saved",
