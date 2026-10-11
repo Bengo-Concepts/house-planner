@@ -1,10 +1,10 @@
 {
- "title": "Plot & house",
- "subtitle": "Demo plot 30 × 45 m · Lot 12, Demo Lane · fictional data",
- "updated": "2026-10-01",
+ "title": "Plot",
+ "subtitle": "Office",
+ "updated": "2026-10-11",
  "sections": [
   {
-   "id": "parcel",
+   "id": "Space",
    "title": "Plot",
    "lead": "Example plot passport. Replace it with your own data in public/data/house.json.",
    "blocks": [
