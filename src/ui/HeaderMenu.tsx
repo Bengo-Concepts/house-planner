@@ -9,6 +9,7 @@ import {
   restorePreview,
   restoreVersion,
   saveSnapshot,
+  startNewProject,
   type SnapshotInfo,
   type VersionInfo,
 } from '../storage'
@@ -189,6 +190,19 @@ export function HeaderMenu() {
   const commit = usePlanStore((s) => s.commit)
   const fileRef = useRef<HTMLInputElement>(null)
   const [showVersions, setShowVersions] = useState(false)
+  const viewOnly = useViewOnly()
+
+  const onNewProject = async () => {
+    const name = window.prompt(t('menu.newProjectPrompt'), t('menu.newProjectDefault'))
+    if (name === null || !name.trim()) return
+    const date = fmtDateTime(new Date(), { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+    const snapshot = t('menu.newProjectSnapshot', { name: plan?.name ?? '', date })
+    try {
+      await startNewProject(name.trim(), snapshot)
+    } catch (e) {
+      window.alert(t('menu.newProjectFailed', { error: (e as Error).message }))
+    }
+  }
 
   const onImport = async (file: File | undefined) => {
     if (!file) return
@@ -221,6 +235,11 @@ export function HeaderMenu() {
         {(close) => (
           <>
             <MenuSection title={t('menu.plan')}>
+              {!viewOnly && (
+                <MenuItem disabled={!plan} onClick={() => { close(); void onNewProject() }}>
+                  {t('menu.newProject')}
+                </MenuItem>
+              )}
               <MenuItem disabled={!plan} onClick={() => { if (plan) downloadPlan(plan); close() }} hint=".json">
                 {t('menu.exportJson')}
               </MenuItem>
