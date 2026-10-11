@@ -261,6 +261,31 @@ export async function restoreVersion(rev: number) {
 export const listSnapshots = () => serverStorage.snapshots()
 export const saveSnapshot = (name: string) => serverStorage.saveSnapshot(name)
 
+/**
+ * Start a new project in this installation: the current server plan is kept as a
+ * named snapshot (restorable from "Versions"), then a blank plan with the same
+ * material library replaces it as a new revision. Nothing is deleted.
+ */
+export async function startNewProject(name: string, snapshotName: string) {
+  const st = usePlanStore.getState()
+  const current = st.plan
+  if (!current || isViewOnly()) return
+  await serverStorage.saveSnapshot(snapshotName)
+  const parsed = parsePlan({
+    version: 1,
+    name,
+    site: { convention: current.site.convention ?? 'y-down-clockwise', width: 30000, depth: 45000 },
+    materials: current.materials,
+    walls: [],
+    openings: [],
+    furniture: [],
+  })
+  if (!parsed.ok) throw new Error(parsed.error)
+  st.exitPreview()
+  nextAuthor = 'new-project'
+  usePlanStore.getState().commit(parsed.plan)
+}
+
 let previewSource: string | null = null
 
 export async function previewSnapshot(id: string, label: string) {
